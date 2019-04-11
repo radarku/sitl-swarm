@@ -6,17 +6,7 @@ The purpose of this is to run /many/ ArduPilot SITL from within Docker.
 DockerHub
 ---------
 
-A pre-built Docker image is available on DockerHub at:
-
-https://hub.docker.com/r/radarku/ardupilot-sitl
-
-To download it, simply:
-
-`docker pull radarku/ardupilot-sitl`
- 
-and to run it:
-
-`docker run -it --rm -p 5760-5780:5760-5780 radarku/ardupilot-sitl`
+Not in DockerHub yet...
 
 
 Quick Start
