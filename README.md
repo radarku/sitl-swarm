@@ -22,11 +22,13 @@ To run the image:
 
 This will start 5 ArduCopter SITL on host TCP port 5760, 5770, 5780, 5790, and 5800 so to connect to it from the host, you could:
 
-`mavproxy.py --master=tcp:localhost:5760`
-`mavproxy.py --master=tcp:localhost:5770`
-`mavproxy.py --master=tcp:localhost:5780`
-`mavproxy.py --master=tcp:localhost:5790`
-`mavproxy.py --master=tcp:localhost:5800`
+```
+mavproxy.py --master=tcp:localhost:5760
+mavproxy.py --master=tcp:localhost:5770
+mavproxy.py --master=tcp:localhost:5780
+mavproxy.py --master=tcp:localhost:5790
+mavproxy.py --master=tcp:localhost:5800
+```
 
 Options
 -------
