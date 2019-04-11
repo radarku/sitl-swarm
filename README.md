@@ -24,26 +24,22 @@ Quick Start
 
 If you'd rather build the docker image yourself:
 
-`docker build --tag ardupilot github.com/radarku/ardupilot-sitl-docker`
+`docker build --tag sitl-swarm .
 
 To run the image:
 
-`docker run -it --rm -p 5760:5760 ardupilot`
+`docker run -it --rm -p 5760-5800:5760-5800 --env NUMCOPTERS=5 sitl-swarm
 
-This will start an ArduCopter SITL on host TCP port 5760, so to connect to it from the host, you could:
+This will start 5 ArduCopter SITL on host TCP port 5760, 5770, 5780, 5790, and 5800 so to connect to it from the host, you could:
 
 `mavproxy.py --master=tcp:localhost:5760`
+`mavproxy.py --master=tcp:localhost:5770`
+`mavproxy.py --master=tcp:localhost:5780`
+`mavproxy.py --master=tcp:localhost:5790`
+`mavproxy.py --master=tcp:localhost:5800`
 
 Options
 -------
-
-There are a number of options available to configure the simulator, for example, to run an ArduRover instance on port 5761, you could:
-
-`docker run -it --rm -p 5761:5760 --env VEHICLE=ardurover ardupilot`
-
-We also have an example `env.list` file which can help you maintain your options and called like so:
-
-`docker run -it --rm -p 5761:5760 --env-file env.list ardupilot`
 
 The full list of options and their default values is:
 
@@ -57,20 +53,6 @@ DIR         270
 MODEL       +
 SPEEDUP     1
 VEHICLE     arducopter
-```
-
-So, for example, you could issue a command such as:
-
-```
-docker run -it --rm -p 5761:5760 \
-   --env VEHICLE=ardurover \
-   --env MODEL=rover-skid \
-   --env LAT=39.9656 \
-   --env LON=-75.1810 \
-   --env ALT=276 \
-   --env DIR=180 \
-   --env SPEEDUP=2 \
-   ardupilot
 ```
 
 Vehicles and their corresponding models are listed below:
