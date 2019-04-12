@@ -85,7 +85,7 @@ if [ $numRovers != 0 ]; then
               -w \
               --model ${ROVERMODEL} \
               --speedup ${SPEEDUP} \
-              --defaults /rover/Tools/autotest/default_params/rover-skid.parm"
+              --defaults /rover/Tools/autotest/default_params/rover.parm"
 
            echo "Starting Sim ${VEHICLE} with command '$simCommand'"
            exec $simCommand &
