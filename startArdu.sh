@@ -73,13 +73,13 @@ if [ $numCopters != 0 ]; then
 fi
 
 # Tell run_in_terminal_window.sh to use screen instead of a graphical option
-export SITL_RITW_TERMINAL="screen -D -m"
-
 if [ $numRovers != 0 ]; then
 	for i in $(seq 0 $(($numRovers-1))); do
 
            VEHICLE=ardurover
            INSTANCE=$arduPilotInstance
+
+           export SITL_RITW_TERMINAL="screen -D -m -S Rover${INSTANCE}"
 
            simCommand="/rover/Tools/autotest/sim_vehicle.py \
               -I${INSTANCE} \
@@ -90,6 +90,7 @@ if [ $numRovers != 0 ]; then
               --no-rebuild \
               --no-mavproxy"
               #--frame ${ROVERMODEL} \
+
            #simCommand="/${VEHICLE} \
            #   -S \
            #   -I${INSTANCE} \
@@ -113,10 +114,13 @@ if [ $numRovers != 0 ]; then
            # Increment arduPilotInstance
            let arduPilotInstance=$(($arduPilotInstance+1))
 
+           sleep 3
+
 	done
 fi
 
-screen -list
+#sleep 3
+#screen -list
 
 # No Subs or Planes yet...
 

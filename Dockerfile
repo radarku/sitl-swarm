@@ -40,7 +40,7 @@ RUN cp build/sitl/bin/arducopter /
 WORKDIR /rover
 
 # Checkout the latest Copter
-RUN git checkout Rover-3.5.0
+RUN git checkout Rover-3.4.2
 
 # Now start build instructions from http://ardupilot.org/dev/docs/setting-up-sitl-on-linux.html
 RUN git submodule update --init --recursive
@@ -56,25 +56,28 @@ RUN ./waf rover
 
 RUN cp build/sitl/bin/ardurover /
 
-# Build the Sub
-WORKDIR /sub
+# Replace the rover.parm file with one that is capable of hitting waypoints
+COPY rover.parm /rover/Tools/autotest/default_params/rover.parm
 
-# Checkout the latest Copter
-RUN git checkout ArduSub-3.5.4
-
-# Now start build instructions from http://ardupilot.org/dev/docs/setting-up-sitl-on-linux.html
-RUN git submodule update --init --recursive
-
-# Need USER set so usermod does not fail...
-# Install all prerequisites now
-#RUN USER=nobody Tools/scripts/install-prereqs-ubuntu.sh -y
-
-# Continue build instructions from https://github.com/ArduPilot/ardupilot/blob/master/BUILD.md
-RUN ./waf distclean
-RUN ./waf configure --board sitl
-RUN ./waf sub
-
-RUN cp build/sitl/bin/ardusub /
+## Build the Sub
+#WORKDIR /sub
+#
+## Checkout the latest Copter
+#RUN git checkout ArduSub-3.5.4
+#
+## Now start build instructions from http://ardupilot.org/dev/docs/setting-up-sitl-on-linux.html
+#RUN git submodule update --init --recursive
+#
+## Need USER set so usermod does not fail...
+## Install all prerequisites now
+##RUN USER=nobody Tools/scripts/install-prereqs-ubuntu.sh -y
+#
+## Continue build instructions from https://github.com/ArduPilot/ardupilot/blob/master/BUILD.md
+#RUN ./waf distclean
+#RUN ./waf configure --board sitl
+#RUN ./waf sub
+#
+#RUN cp build/sitl/bin/ardusub /
 
 # Plane won't work yet...
 #RUN ./waf plane
