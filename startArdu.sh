@@ -72,22 +72,35 @@ if [ $numCopters != 0 ]; then
 	done
 fi
 
+# Tell run_in_terminal_window.sh to use screen instead of a graphical option
+export SITL_RITW_TERMINAL="screen -D -m"
+
 if [ $numRovers != 0 ]; then
 	for i in $(seq 0 $(($numRovers-1))); do
 
            VEHICLE=ardurover
            INSTANCE=$arduPilotInstance
 
-           simCommand="/${VEHICLE} \
-              -S \
+           simCommand="/rover/Tools/autotest/sim_vehicle.py \
               -I${INSTANCE} \
-              --home ${LAT},${LON},${ALT},${DIR} \
+              --vehicle APMrover2 \
+              --custom-location=${LAT},${LON},${ALT},${DIR} \
               -w \
-              --model ${ROVERMODEL} \
               --speedup ${SPEEDUP} \
-              --defaults /rover/Tools/autotest/default_params/rover.parm"
+              --no-rebuild \
+              --no-mavproxy"
+              #--frame ${ROVERMODEL} \
+           #simCommand="/${VEHICLE} \
+           #   -S \
+           #   -I${INSTANCE} \
+           #   --home ${LAT},${LON},${ALT},${DIR} \
+           #   -w \
+           #   --model ${ROVERMODEL} \
+           #   --speedup ${SPEEDUP} \
+           #   --defaults /rover/Tools/autotest/default_params/rover.parm"
 
            echo "Starting Sim ${VEHICLE} with command '$simCommand'"
+           #exec screen -dmS Rover${INSTANCE} $simCommand
            exec $simCommand &
            pids[${arduPilotInstance}]=$!
 
@@ -102,6 +115,8 @@ if [ $numRovers != 0 ]; then
 
 	done
 fi
+
+screen -list
 
 # No Subs or Planes yet...
 
