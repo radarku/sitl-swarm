@@ -1,6 +1,8 @@
 Multi-Agent ArduPilot Software-in-the-Loop Simulator Docker Container
 =====================================================================
 
+![sitl-swarm-logo](sitl-swarm-logo.png)
+
 The purpose of this is to run /many/ ArduPilot SITL from within Docker.
 
 DockerHub
