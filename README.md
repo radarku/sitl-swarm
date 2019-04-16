@@ -6,7 +6,17 @@ The purpose of this is to run /many/ ArduPilot SITL from within Docker.
 DockerHub
 ---------
 
-Not in DockerHub yet...
+A pre-built Docker image is available on DockerHub at:
+
+https://hub.docker.com/r/radarku/sitl-swarm
+
+To download it, simply:
+
+`docker pull radarku/sitl-swarm`
+ 
+and to run it:
+
+`docker run --rm -p 5760-5800:5760-5800 --env NUMCOPTERS=3 NUMROVERS=3 radarku/sitl-swarm`
 
 
 Quick Start
@@ -37,22 +47,22 @@ Options
 The full list of options and their default values is:
 
 ```
-INSTANCE 0
-LAT 42.3898
-LON -71.1476
-ALT 14
-DIR 270
-COPTERMODEL +
-ROVERMODEL +
-SUBMODEL +
-PLANEMODEL +
-SPEEDUP 1
-NUMCOPTERS 0
-NUMROVERS 0
-NUMSUBS 0
-NUMPLANES 0
-INCREMENTSTEPLAT 0.01
-INCREMENTSTEPLON 0.01
+INSTANCE          0
+LAT               42.3898
+LON               -71.1476
+ALT               14
+DIR               270
+COPTERMODEL       +
+ROVERMODEL        +
+SUBMODEL          +
+PLANEMODEL        +
+SPEEDUP           1
+NUMCOPTERS        0
+NUMROVERS         0
+NUMSUBS           0
+NUMPLANES         0
+INCREMENTSTEPLAT  0.01
+INCREMENTSTEPLON  0.01
 ```
 
 Vehicles and their corresponding models are listed below:
