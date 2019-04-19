@@ -47,14 +47,14 @@ if [ $numCopters != 0 ]; then
            VEHICLE=arducopter
            INSTANCE=$arduPilotInstance
 
-           simCommand="/${VEHICLE} \
-              -S \
+           simCommand="/copter/Tools/autotest/sim_vehicle.py \
               -I${INSTANCE} \
-              --home ${LAT},${LON},${ALT},${DIR} \
+              --vehicle ArduCopter \
+              --custom-location=${LAT},${LON},${ALT},${DIR} \
               -w \
-              --model ${COPTERMODEL} \
               --speedup ${SPEEDUP} \
-              --defaults /copter/Tools/autotest/default_params/copter.parm"
+              --no-rebuild \
+              --no-mavproxy"
 
            echo "Starting Sim ${VEHICLE} with command '$simCommand'"
            exec $simCommand &
@@ -90,15 +90,6 @@ if [ $numRovers != 0 ]; then
               --no-rebuild \
               --no-mavproxy"
               #--frame ${ROVERMODEL} \
-
-           #simCommand="/${VEHICLE} \
-           #   -S \
-           #   -I${INSTANCE} \
-           #   --home ${LAT},${LON},${ALT},${DIR} \
-           #   -w \
-           #   --model ${ROVERMODEL} \
-           #   --speedup ${SPEEDUP} \
-           #   --defaults /rover/Tools/autotest/default_params/rover.parm"
 
            echo "Starting Sim ${VEHICLE} with command '$simCommand'"
            #exec screen -dmS Rover${INSTANCE} $simCommand

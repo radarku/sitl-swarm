@@ -36,6 +36,8 @@ RUN ./waf copter
 
 RUN cp build/sitl/bin/arducopter /
 
+COPY copter.parm /copter/Tools/autotest/default_params/copter.parm
+
 # Build the ROVER
 WORKDIR /rover
 
