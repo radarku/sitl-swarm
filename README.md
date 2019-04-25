@@ -70,12 +70,12 @@ INCREMENTSTEPLON  0.01
 Vehicles and their corresponding models are listed below:
 
 ```
-arducopter: octa-quad|tri|singlecopter|firefly|gazebo-
+ArduCopter: octa-quad|tri|singlecopter|firefly|gazebo-
     iris|calibration|hexa|heli|+|heli-compound|dodeca-
     hexa|heli-dual|coaxcopter|X|quad|y6|IrisRos|octa
-ardurover: rover|gazebo-rover|rover-skid|calibration
-ardusub: vectored
-arduplane: gazebo-zephyr|CRRCSim|last_letter|plane-
+APMrover2: rover|gazebo-rover|rover-skid|calibration
+ArduSub: vectored
+ArduPlane: gazebo-zephyr|CRRCSim|last_letter|plane-
     vtail|plane|quadplane-tilttri|quadplane|quadplane-
     tilttrivec|calibration|plane-elevon|plane-
     tailsitter|plane-dspoilers|quadplane-tri
