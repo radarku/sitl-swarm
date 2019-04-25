@@ -18,7 +18,7 @@ To download it, simply:
  
 and to run it:
 
-`docker run --rm -p 5760-5800:5760-5800 --env NUMCOPTERS=3 NUMROVERS=3 radarku/sitl-swarm`
+`docker run --rm -p 5760-5800:5760-5800 --env NUMCOPTERS=3 --env NUMROVERS=3 radarku/sitl-swarm`
 
 
 Quick Start
@@ -30,7 +30,7 @@ If you'd rather build the docker image yourself:
 
 To run the image:
 
-`docker run --rm -p 5760-5800:5760-5800 --env NUMCOPTERS=3 NUMROVERS=3 sitl-swarm`
+`docker run --rm -p 5760-5800:5760-5800 --env NUMCOPTERS=3 --env NUMROVERS=3 sitl-swarm`
 
 This will start 3 ArduCopter and 3 ArduRover SITL on host TCP ports 5760, 5770, 5780, 5790, 5800, and 5810 so to connect to it from the host, you could:
 
