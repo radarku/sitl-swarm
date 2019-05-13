@@ -47,6 +47,10 @@ if [ $numCopters != 0 ]; then
            VEHICLE=arducopter
            INSTANCE=$arduPilotInstance
 
+           export SITL_RITW_TERMINAL="screen -D -m -S Copter${INSTANCE}"
+
+           mkdir /${VEHICLE}${INSTANCE} && cd /${VEHICLE}${INSTANCE}
+
            simCommand="/copter/Tools/autotest/sim_vehicle.py \
               -I${INSTANCE} \
               --vehicle ArduCopter \
@@ -68,6 +72,9 @@ if [ $numCopters != 0 ]; then
 
            # Increment arduPilotInstance
            let arduPilotInstance=$(($arduPilotInstance+1))
+           
+           # This shouldn't be necessary, but let's give it some time to spin-up
+           sleep 3
 
 	done
 fi
@@ -80,6 +87,8 @@ if [ $numRovers != 0 ]; then
            INSTANCE=$arduPilotInstance
 
            export SITL_RITW_TERMINAL="screen -D -m -S Rover${INSTANCE}"
+           
+           mkdir /${VEHICLE}${INSTANCE} && cd /${VEHICLE}${INSTANCE}
 
            simCommand="/rover/Tools/autotest/sim_vehicle.py \
               -I${INSTANCE} \
@@ -92,7 +101,6 @@ if [ $numRovers != 0 ]; then
               #--frame ${ROVERMODEL} \
 
            echo "Starting Sim ${VEHICLE} with command '$simCommand'"
-           #exec screen -dmS Rover${INSTANCE} $simCommand
            exec $simCommand &
            pids[${arduPilotInstance}]=$!
 
@@ -105,6 +113,7 @@ if [ $numRovers != 0 ]; then
            # Increment arduPilotInstance
            let arduPilotInstance=$(($arduPilotInstance+1))
 
+           # This shouldn't be necessary, but let's give it some time to spin-up
            sleep 3
 
 	done

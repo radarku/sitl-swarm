@@ -20,7 +20,7 @@ RUN cp -r ardupilot sub
 WORKDIR /copter
 
 # Checkout the latest Copter
-RUN git checkout Copter-3.6.7
+RUN git checkout Copter-3.6.3
 
 # Now start build instructions from http://ardupilot.org/dev/docs/setting-up-sitl-on-linux.html
 RUN git submodule update --init --recursive
