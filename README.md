@@ -18,7 +18,7 @@ To download it, simply:
  
 and to run it:
 
-`docker run --rm -p 5760-5810:5760-5810 --env NUMCOPTERS=3 --env NUMROVERS=3 radarku/sitl-swarm`
+`docker run --rm -p 5760-5810:5760-5810 --env NUMCOPTERS=3 radarku/sitl-swarm`
 
 
 Quick Start
@@ -30,17 +30,14 @@ If you'd rather build the docker image yourself:
 
 To run the image:
 
-`docker run --rm -p 5760-5810:5760-5810 --env NUMCOPTERS=3 --env NUMROVERS=3 sitl-swarm`
+`docker run --rm -p 5760-5810:5760-5810 --env NUMCOPTERS=3 sitl-swarm`
 
-This will start 3 ArduCopter and 3 ArduRover SITL on host TCP ports 5760, 5770, 5780, 5790, 5800, and 5810 so to connect to it from the host, you could:
+This will start 3 ArduCopter SITL on host TCP ports 5760, 5770, and 5780; so to connect to it from the host, you could:
 
 ```
 mavproxy.py --master=tcp:localhost:5760
 mavproxy.py --master=tcp:localhost:5770
 mavproxy.py --master=tcp:localhost:5780
-mavproxy.py --master=tcp:localhost:5790
-mavproxy.py --master=tcp:localhost:5800
-mavproxy.py --master=tcp:localhost:5810
 ```
 
 Options
@@ -55,14 +52,8 @@ LON               -71.1476
 ALT               14
 DIR               270
 COPTERMODEL       +
-ROVERMODEL        +
-SUBMODEL          +
-PLANEMODEL        +
 SPEEDUP           1
 NUMCOPTERS        0
-NUMROVERS         0
-NUMSUBS           0
-NUMPLANES         0
 INCREMENTSTEPLAT  0.01
 INCREMENTSTEPLON  0.01
 ```
@@ -73,11 +64,4 @@ Vehicles and their corresponding models are listed below:
 ArduCopter: octa-quad|tri|singlecopter|firefly|gazebo-
     iris|calibration|hexa|heli|+|heli-compound|dodeca-
     hexa|heli-dual|coaxcopter|X|quad|y6|IrisRos|octa
-APMrover2: rover|gazebo-rover|rover-skid|calibration
-ArduSub: vectored
-ArduPlane: gazebo-zephyr|CRRCSim|last_letter|plane-
-    vtail|plane|quadplane-tilttri|quadplane|quadplane-
-    tilttrivec|calibration|plane-elevon|plane-
-    tailsitter|plane-dspoilers|quadplane-tri
-    |quadplane-cl84|jsbsim
 ```
