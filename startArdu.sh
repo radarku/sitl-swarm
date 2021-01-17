@@ -51,12 +51,16 @@ if [ $numCopters != 0 ]; then
 
            mkdir /${VEHICLE}${INSTANCE} && cd /${VEHICLE}${INSTANCE}
 
+           cp /copter.parm copter.parm
+           echo "SYSID_THISMAV   ${INSTANCE}" >> copter.parm
+
            simCommand="/copter/Tools/autotest/sim_vehicle.py \
               -I${INSTANCE} \
               --vehicle ArduCopter \
               --custom-location=${LAT},${LON},${ALT},${DIR} \
               -w \
               --speedup ${SPEEDUP} \
+              --add-param-file copter.parm \
               --no-rebuild \
               --no-mavproxy"
 
@@ -73,46 +77,6 @@ if [ $numCopters != 0 ]; then
            # Increment arduPilotInstance
            let arduPilotInstance=$(($arduPilotInstance+1))
            
-           # This shouldn't be necessary, but let's give it some time to spin-up
-           sleep 3
-
-	done
-fi
-
-# Tell run_in_terminal_window.sh to use screen instead of a graphical option
-if [ $numRovers != 0 ]; then
-	for i in $(seq 0 $(($numRovers-1))); do
-
-           VEHICLE=ardurover
-           INSTANCE=$arduPilotInstance
-
-           export SITL_RITW_TERMINAL="screen -D -m -S Rover${INSTANCE}"
-           
-           mkdir /${VEHICLE}${INSTANCE} && cd /${VEHICLE}${INSTANCE}
-
-           simCommand="/rover/Tools/autotest/sim_vehicle.py \
-              -I${INSTANCE} \
-              --vehicle APMrover2 \
-              --custom-location=${LAT},${LON},${ALT},${DIR} \
-              -w \
-              --speedup ${SPEEDUP} \
-              --no-rebuild \
-              --no-mavproxy"
-              #--frame ${ROVERMODEL} \
-
-           echo "Starting Sim ${VEHICLE} with command '$simCommand'"
-           exec $simCommand &
-           pids[${arduPilotInstance}]=$!
-
-           #Make it so all the instances don't start at the same Lat/Lon
-           LAT=$(echo "$LAT + $incrementStepLat" | bc)
-           LON=$(echo "$LON + $incrementStepLon" | bc)
-           ALT=$(echo "$ALT + $incrementStepAlt" | bc)
-           HDG=$(echo "$HDG + $incrementStepHdg" | bc)
-
-           # Increment arduPilotInstance
-           let arduPilotInstance=$(($arduPilotInstance+1))
-
            # This shouldn't be necessary, but let's give it some time to spin-up
            sleep 3
 
@@ -121,8 +85,6 @@ fi
 
 #sleep 3
 #screen -list
-
-# No Subs or Planes yet...
 
 # wait for all pids
 for pid in ${pids[*]}; do

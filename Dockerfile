@@ -42,6 +42,7 @@ RUN ./waf copter
 RUN cp build/sitl/bin/arducopter /
 
 COPY copter.parm /copter/Tools/autotest/default_params/copter.parm
+COPY copter.parm /
 
 # TCP 5760 is what the sim exposes by default, each INSTANCE increments by 10
 EXPOSE 5760-7760
