@@ -1,0 +1,25 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag radarku/sitl-swarm:${{ github.sha }}
+    - name: DockerHub Login
+      env:
+        DOCKERHUB_USER: radarku
+        DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_SECRET }}
+      run: docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
+    - name: Push to DockerHub
+      run: docker push radarku/sitl-swarm:${{ github.sha }}
